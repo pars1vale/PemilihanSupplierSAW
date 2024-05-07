@@ -11,17 +11,16 @@ class SupplierController extends Controller
     public function index(Request $request)
     {
         $supplier = Supplier::get();
-	    $data = [
-	            'title' => 'DATA SUPPLIER',
-	            'date' => date('d/m/Y'),
-	            'supplier' => $supplier
-	    ];
+        $data = [
+            'title' => 'DATA SUPPLIER',
+            'date' => date('d/m/Y'),
+            'supplier' => $supplier
+        ];
 
-	    if($request->has('download'))
-	    {
-	        $pdf = PDF::loadView('supplier.pdf',$data);
-	        return $pdf->download('supplier.pdf');
-	    }
+        if ($request->has('download')) {
+            $pdf = PDF::loadView('supplier.pdf', $data);
+            return $pdf->download('supplier.pdf');
+        }
 
         return view('supplier.index', compact('supplier'));
     }
@@ -74,4 +73,3 @@ class SupplierController extends Controller
         return redirect()->route('supplier.index')->with('success', 'supplier successfully deleted.');
     }
 }
-
